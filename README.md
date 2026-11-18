@@ -16,6 +16,7 @@ Each skill and agent is symlinked into `~/.claude`, and one you already have wit
 | Command | What it does |
 | --- | --- |
 | `/review` | Reviews your local commits or a teammate's PRs, using the subskills below |
+| `/pr-loop` | A script checks every minute and wakes Claude when a PR needs you. Runs `/review` on PRs waiting for you.<br>Leaves pending reviews to check before you submit.<br>Auto-approves once feedback is addressed, also if review gets dismissed 🕊️ |
 | `/shape` | Shapes an epic: appetite, countable measures, then a solution sketch |
 | `/release` | Plans how a change is tested and switched on in production |
 | `/cleanup` | Frees disk space by removing worktrees whose PRs are merged or closed |
