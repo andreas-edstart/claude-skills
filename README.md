@@ -9,7 +9,7 @@ git clone https://github.com/andreas-edstart/claude-skills.git ~/.claude-skills
 ~/.claude-skills/bootstrap
 ```
 
-Each skill is symlinked into `~/.claude/skills`, and one you already have with the same name is left alone. To add a skill, create it in `~/.claude-skills` and re-run `bootstrap`.
+Each skill and agent is symlinked into `~/.claude`, and one you already have with the same name is left alone. To add one, create it in `skills/` or `agents/` and re-run `bootstrap`.
 
 ## Commands
 
@@ -23,7 +23,7 @@ Each skill is symlinked into `~/.claude/skills`, and one you already have with t
 
 ## Subskills
 
-`/review` runs the first six on every PR. Claude also picks any of them up on its own when they fit.
+`/review` runs all of these except `bulletproof` on every PR. Claude also picks any of them up on its own when they fit.
 
 - `naming`: use the words the product already uses
 - `types`: model the domain and make impossible states unrepresentable
@@ -32,3 +32,7 @@ Each skill is symlinked into `~/.claude/skills`, and one you already have with t
 - `logging`: where and what to log
 - `readability`: code that reads as the story of what it does
 - `bulletproof`: prove every assumption before building on it
+
+### Agents
+
+- `wcgw`: finds what will go wrong with a change, never fixes

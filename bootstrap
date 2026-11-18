@@ -1,8 +1,10 @@
 #!/usr/bin/env bash
 
-# Symlink each skill into ~/.claude/skills. An existing skill of the same name is left alone.
-mkdir -p ~/.claude/skills
-for skill in ~/.claude-skills/*/; do
-  skill=${skill%/}
-  [ "$(readlink ~/.claude/skills/"${skill##*/}")" = "$skill" ] || ln -s "$skill" ~/.claude/skills
-done
+# Symlink each skill and agent into ~/.claude. An existing one of the same name is left alone.
+link() {
+  mkdir -p "$2"
+  [ "$(readlink "$2/${1##*/}")" = "$1" ] || ln -s "$1" "$2"
+}
+
+for skill in ~/.claude-skills/skills/*/; do link "${skill%/}" ~/.claude/skills; done
+for agent in ~/.claude-skills/agents/*.md; do link "$agent" ~/.claude/agents; done
