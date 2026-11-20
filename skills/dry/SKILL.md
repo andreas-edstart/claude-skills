@@ -9,10 +9,12 @@ Each rule has one home, so changing it changes every place that relies on it. Be
 codebase already decides it and call that. A second copy gets left behind when the rule changes, and the two disagree:
 a page offers a date its save then refuses.
 
-Pull nearby copies onto the same home while you're there: the same file, and the files the change already touches.
-Take only the easy wins, a call swap that keeps behaviour. A copy that would behave differently through the shared home
-is a question for the author, not a quiet change. Leave copies further afield alone; this isn't a sweep of the
-codebase. A new home its neighbours don't use is just one more copy.
+Pull nearby copies onto the same home while you're there. How far depends on whose change it is. Building your own,
+reach past the files the change touches to the other copies of the rule you're reusing. Reviewing someone else's, keep
+to the same file and the files their change touches: asking for more widens their PR. Either way, take only the easy
+wins, a call swap that keeps behaviour. A copy that would behave differently through the shared home is a question for
+the author, not a quiet change. This isn't a sweep of the codebase. A new home its neighbours don't use is just one
+more copy.
 
 When reusing a function, check what it does differently from the copy, and pin any change with a test. A helper can
 carry its caller's context: split the rule from the lookup so each caller supplies its own.
