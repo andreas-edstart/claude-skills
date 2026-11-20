@@ -32,7 +32,7 @@ you find more precise, or a shared component that won't take the label, is no re
 - Name a handler after the action the user takes, in its label's words: "Save as a rule" gives `saveAsRule`.
 - Name a component for everything it renders, not the first case it was built for.
 - A test's name states the behaviour in domain words.
-- When naming is being aligned across the code, update the tests to the same terminology too. Otherwise, don't nitpick a one-off variable name inside a unit test.
+- When naming is being aligned across the code, update the tests to the same terminology too. Otherwise, on someone else's PR, don't raise the name of a value inside a unit test, whether a one-off local or a fixture several tests share (`september`); only a test's name is checked there. On my own branch, every name counts.
 - Check a KDoc in two passes. First, strike what says how the code works or what it does; the code already shows that. Then read what's left against the name. If it says nothing the name doesn't, delete the KDoc rather than trimming it. On `BulkCustomerInvoiceProgress`, "How far a bulk has got" says nothing `Progress` doesn't, so the KDoc goes.
 - A local or lambda variable's name needs to say only as much as its scope hides. Where every use is close enough to the definition for the meaning to be apparent, `val added = schemaDiff(…)?.added` is fine; read further down a long function, `added` no longer says what was added.
 - Don't propose a name over about 20 characters (Code Complete's "Optimum Name Length"). If being accurate takes a clause (`failedForGoodWithNoRetryWaiting`, 31), say what the current name gets wrong and let the author choose. A name that long usually means the value holds two ideas.
