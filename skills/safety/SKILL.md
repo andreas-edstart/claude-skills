@@ -5,10 +5,10 @@ description: Write code that fails safely and loudly. Use when writing or review
 
 # safety
 
-Code that meets bad data fails in a way someone can see and act on, and never takes good data down with it.
+Code that meets bad data fails in a way someone can see and act on.
 
 - No `!!` in production Kotlin. A failed `!!` shows admin users a null pointer error that tells them nothing. Throw `InvalidState` with what is missing and the id that lets someone find it: `tuitionYear ?: throw InvalidState("Plan has no tuition year", "accountPlanId" to id)`.
-- A job that loops over many records checks each one in its own `try`/`catch` and skips one that fails, so one bad record can't stop everyone else's.
+- A job fails as a whole when any part of it fails. The failed status is what gets noticed, in the FailedJobs report, so a job never finishes as a success while logging the part that broke. Rethrow with the record's id.
 - Bound every query to the records in hand or a date. Never load a table's whole history, such as every failed job ever written.
 - A timeout, limit or batch size states why it differs from the default, or uses the default.
 - Bad config throws; it never quietly does nothing.
