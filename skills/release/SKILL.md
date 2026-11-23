@@ -13,14 +13,14 @@ A PR stack that delivers a notable feature gets a release plan like this without
 
 2. **Outcome and measures.** Read them from the epic, because they are what the release is judged against. Ask when they are missing, vague, or don't cover what the change does. Pin each measure as `/shape` step 4 does. Measure its baseline now, before anything is enabled, and write the query that computes it after release. Agree them before going on.
 
-3. **Test plan.** Ask how it will be tested before it is enabled in production: who tests, in which environment, on which accounts, and what they do. Then explore the answer:
-   - every behaviour change from step 1 has a scenario: the account, the steps, and the result to expect, in UI labels
-   - so does every path that should behave as master does
-   - each scenario moves a measure, or says why no measure covers it
+3. **Test plan.** Ask how it will be tested before it is enabled in production: who tests, in which environment, on which accounts, and what they do. Then explore the answer, as two separate parts of the plan:
+   - **Human review** comes first, and spends people's time only on what no test or query can judge, such as whether an AI's answers are right. Say who reviews, how many items, and how sure that sample makes us. A scenario a person runs gives the account, the steps and the result to expect, in UI labels.
+   - **Automated review** covers the rest. Every behaviour change from step 1, and every path that should behave as master does, names the test that pins it before deploy and the query that checks it in prod after each phase.
+   - each check moves a measure, or says why no measure covers it
    - what has already been tried on beta, from the `edstart` MCP: the outcomes, and anything stuck or failed
    - customer emails and SMS follow the root `CLAUDE.md` rules
 
-   Name each gap with the scenario that would close it. Ask rather than assume who does what.
+   Name each gap with the check that would close it. Ask rather than assume who does what.
 
 4. **Enabling in production.**
    - the phases (a few accounts, a cohort, everyone)
@@ -30,6 +30,6 @@ A PR stack that delivers a notable feature gets a release plan like this without
    - how to roll back
    - a briefing for the ops contact, given before the first phase: what they'll see change, what to tell us about, and how to switch it off, all in UI labels. The team covers holidays; the contact needs to know what's changing, not who's on watch.
 
-5. **Release plan.** Draft it in chat, opening with the overall in one line: ready or not, and the measure that decides it. Never open with a table. Then give the phases, the test plan, the measures with baselines and queries, go or no-go for each phase, and the ops briefing. Run `bin/lint-prose` on the draft. Save it in the worktree's `tasks/` and in a memory, with its queries, and post nothing yet.
+5. **Release plan.** Draft it in chat, opening with the overall in one line: ready or not, and the measure that decides it. Never open with a table. Then give the phases, the human review, the automated review, the measures with baselines and queries, go or no-go for each phase, and the ops briefing. Run `bin/lint-prose` on the draft. Save it in the worktree's `tasks/` and in a memory, with its queries, and post nothing yet.
 
 6. **Handover after go-live.** Once it's switched on for everyone, post the plan on the ticket as the handover, rewritten as what happened: what was switched on and when, each phase's numbers against the report or prediction, anything stopped or rolled back, each measure's reading so far and when the deciding one can be read, and the ops briefing. Re-measure every number first. When the deciding measure can be read, post its reading on the ticket as well.
