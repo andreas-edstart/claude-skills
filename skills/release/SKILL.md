@@ -18,7 +18,8 @@ A PR stack that delivers a notable feature gets a release plan like this without
    - **Automated review** covers the rest. Every behaviour change from step 1, and every path that should behave as master does, names the test that pins it before deploy and the query that checks it in prod after each phase.
    - each check moves a measure, or says why no measure covers it
    - what has already been tried on beta, from the `edstart` MCP: the outcomes, and anything stuck or failed
-   - customer emails and SMS follow the root `CLAUDE.md` rules
+   - before running a scenario on beta, confirm beta runs a build with the change and the rollout has finished. Check that the scenario's account reaches the changed check, because an earlier check can stop it first, and beta's data often does
+   - customer emails and SMS follow the root `CLAUDE.md` rules. The beta testing memory says what beta sends, and to whom
 
    Name each gap with the check that would close it. Ask rather than assume who does what.
 
@@ -27,8 +28,9 @@ A PR stack that delivers a notable feature gets a release plan like this without
    - what enabling does to work already queued or in progress in prod
    - what to watch after each phase: the measures, plus failure signals such as stuck items or error tasks, each with its query
    - what stops a phase
+   - a stop condition that compares a count against a prediction: predict how many will actually get through, not how many the change applies to. A change often removes one obstacle among several, and whatever it lets past still has to pass every other check. For example, letting at risk families renew still sends some of them to manual review for other reasons. So either predict with every check applied, or compare against a count that only the change decides, such as how many no longer fail the check it changed
    - how to roll back
-   - a briefing for the ops contact, given before the first phase: what they'll see change, what to tell us about, and how to switch it off, all in UI labels. The team covers holidays; the contact needs to know what's changing, not who's on watch.
+   - a briefing for the ops contact, given before the first phase: what they'll see change, what to tell us about, and how to switch it off, all in UI labels. The team covers holidays; the contact needs to know what's changing, not who's on watch. Write each instruction while looking at the screen it's done on, using the labels and controls it shows: a Yes/No drop-down isn't a tick box, and a field may show a code rather than its label.
 
 5. **Release plan.** Draft it in chat, opening with the overall in one line: ready or not, and the measure that decides it. Never open with a table. Then give the phases, the human review, the automated review, the measures with baselines and queries, go or no-go for each phase, and the ops briefing. Run `bin/lint-prose` on the draft. Save it in the worktree's `tasks/` and in a memory, with its queries, and post nothing yet.
 
