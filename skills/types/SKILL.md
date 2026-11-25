@@ -1,6 +1,6 @@
 ---
 name: types
-description: Avoid unnecessary optionality. Use when writing or reviewing types.
+description: Avoid unnecessary optionality, and type entity ids. Use when writing or reviewing types.
 ---
 
 # Types
@@ -36,6 +36,12 @@ Settle what the client gets from the client's own request (on beta, the response
 ## One shape, one kind
 
 Make illegal states unrepresentable (Yaron Minsky's phrase): a type that can hold a state the domain never has, such as a picked bursary with no name, lets code that would break on it compile. Watch for a field made optional so a different kind of entry can share a list. TypeScript compares types by their structure, so once `name` is optional, a nameless free-entry bursary fits among the school bursaries a family picks. After that the type can't promise a picked bursary has a name, and code that relies on it compiles without one. Ask why the field is optional: if the answer is "so the other kind fits", give the other kind its own field. The cost is usually one extra line where both are handled.
+
+## Typed ids
+
+An entity's id is `Id<T>`, never a bare `UUID`, in parameters, returns, fields and collections alike. `Id<FileInfo>` says what it identifies, and the compiler refuses an account's id where a file's belongs; a `UUID` does neither. Unwrap with `.id` only at the call into an API that takes a `UUID`, such as `repo.addRelation`, and wrap a ref's `toId` with `.toId()`.
+
+Example: `CustomerInvoice.fileIds(repo): List<UUID>` beside `ManualInvoiceCreator.create(fileIds: List<Id<FileInfo>>)`, one concept typed two ways.
 
 ## Precedent
 
