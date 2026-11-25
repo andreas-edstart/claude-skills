@@ -1,6 +1,6 @@
 ---
 name: types
-description: Avoid unnecessary optionality, and type entity ids. Use when writing or reviewing types.
+description: Avoid unnecessary optionality, type entity ids, and use sets where order and duplicates mean nothing. Use when writing or reviewing types.
 ---
 
 # Types
@@ -42,6 +42,12 @@ Make illegal states unrepresentable (Yaron Minsky's phrase): a type that can hol
 An entity's id is `Id<T>`, never a bare `UUID`, in parameters, returns, fields and collections alike. `Id<FileInfo>` says what it identifies, and the compiler refuses an account's id where a file's belongs; a `UUID` does neither. Unwrap with `.id` only at the call into an API that takes a `UUID`, such as `repo.addRelation`, and wrap a ref's `toId` with `.toId()`.
 
 Example: `CustomerInvoice.fileIds(repo): List<UUID>` beside `ManualInvoiceCreator.create(fileIds: List<Id<FileInfo>>)`, one concept typed two ways.
+
+## Sets
+
+In a signature (a parameter, return or field), a collection whose order means nothing and that holds each item once is a `Set`: the type says both. Inside a function body, a `List` with `distinct()` is fine.
+
+Example: `ManualInvoiceCreator.create(fileIds: List<Id<FileInfo>>)`, where each file is linked once, in no order.
 
 ## Precedent
 
