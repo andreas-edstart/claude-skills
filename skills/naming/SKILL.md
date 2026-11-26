@@ -21,7 +21,7 @@ you find more precise, or a shared component that won't take the label, is no re
 
 ## Principles
 
-- One thing, one name, in every layer: server, API, front end, tests, comments. A thing is what a name points at: a feature, setting, entity, field, status or value. Reuse its existing name (`originatingAccountPlanId`) instead of adding a synonym (`sourceAccountPlanId`). The words around it can vary: a parent can "set up" or "declare" an arrangement, as long as the arrangement has one name.
+- One thing, one name, in every layer: server, API, front end, tests, comments. A thing is what a name points at: a feature, setting, entity, field, status or value. Reuse its existing name (`originatingAccountPlanId`) instead of adding a synonym (`sourceAccountPlanId`). The words around it can vary: a parent can "set up" or "declare" an arrangement, as long as the arrangement has one name. Show it with the code names, ideally the one line where both meet (`share()` returns `percentPortion()`). Docs and comments are words around the thing, so they aren't the evidence.
 - Names that set appearance (component props and CSS that style something) may describe the look rather than the state behind it: a `done` task can pass `faded` to its marker. Translating domain state into appearance naturally flips the word, so don't raise it.
 - Keep a word's established meaning. If `billed` means invoiced everywhere else, don't call a total that includes estimates `billed`. Search the code for the word first.
 - Name for what it means, not how it is worked out.
