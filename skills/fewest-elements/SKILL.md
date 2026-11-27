@@ -24,5 +24,13 @@ Check again each time the design changes, not only at the end: every change of d
 Keep a piece that stops a state the domain never has, such as one type for two fields only ever set together, or that
 carries a guarantee: a lock, a transaction per record, a loud failure.
 
-In a review, open on the piece and what already covers it, and cite the rule by name. List what was looked at but kept,
+A piece that stays is private by default: "minimize the accessibility of classes and members" (Joshua Bloch, Effective
+Java). When a change adds a type, function or constant, find everything that uses it and give it the narrowest
+visibility that covers them: `private` when only its own file uses it, `internal` when only its module does, that
+module's tests included. A private type says at once that it exists to support one local algorithm, so a reader looks
+for no other callers, and changing or deleting it can't break anything outside the file. Widen it in the change that
+adds the use that needs it, not before.
+
+In a review, open on the piece and what already covers it, and cite the rule by name. A new piece more visible than its
+uses need is a finding too: name where it's used and the visibility that covers it. List what was looked at but kept,
 each with what it guarantees.
